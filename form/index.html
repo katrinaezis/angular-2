@@ -52,24 +52,24 @@
 
 
 		<!-- Form: initiate your app and controller here -->
-		<div class="container">
-			<form>
+		<div class="container" ng-app="myApp" ng-controller="myCtrl">
+			<form name="myForm" novalidate>
 			
 				<!-- username -->
-				<div class="form-group">
+				<div class="form-group" ng-class="{'hasError' : myForm.username.$invalid && myForm.username.$touched}">
 					<label>Name:</label>
-					<input class="form-control" ng-required="true" ng-model="user.username" required>		
+					<input class="form-control" ng-required="true" ng-model="user.username" name="username" ng-minlength="6" required><p ng-show="myForm.username.$error.minlength" class="help-block">Username is too short.</p>
 				</div>			
 
 				<!-- Email -->
-				<div class="form-group">
+				<div class="form-group" ng-class="{'hasError' : myForm.email.$invalid && myForm.email.$touched}">
 					<label>Email:</label>
-					<input  name="email" type="email" class="form-control" ng-required="true" ng-model="user.email" required></input>           					
+					<input  name="email" type="email" class="form-control" ng-required="true" ng-model="user.email" required><p ng-show="myForm.email.$error.email" class="help-block">Email is not valid.</p></input>           					
 				</div>
 
 				<!-- Submit button -->
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary">Submit</button>      
+				<div class="form-group" ng-class="{'hasError' : myForm.$invalid && myForm.$dirty}">
+					<button ng-disabled="myForm.$invalid" type="submit" class="btn btn-primary">Submit</button>      
 				</div>
 
 			</form>
